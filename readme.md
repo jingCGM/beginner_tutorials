@@ -30,31 +30,17 @@ echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 Run publisher and subscriber:
 open 1st terminal:
 ```
-	roscore
+	roslaunch beginner_tutorials services.launch [default:=default rate:=1]
 ```
-open 2nd terminal:
-```
-	rosrun beginner_tutorials talker 
-```
-open 3rd terminal:
-```
-	rosrun beginner_tutorials listener
-```
+Where user can change value of rate. In extra terminals, there will be talker and listeners information. default value is 2, and the range of rate is from 1 to 20, if user set value out of the range, code will use nearest values available in the range. 
 ---
 Run server and client:
-open 1st terminal:
+open terminal:
 ```
-	roscore
+	roslaunch beginner_tutorials services.launch [default:=default value1:=0 value2:=1]
 ```
-open 2nd terminal:
-```
-	rosrun beginner_tutorials add_two_ints_server 
-```
-open 3rd terminal:
-```
-	rosrun beginner_tutorials add_two_ints_client 1 2
-```
-
+Where user can change values of value1 and value2. In extra terminal, there will be sum of the two values. Dedault value of value1 and value2 are 1 and 2.
+Terminal also shows testing messages of all 5 loggings.
 
 ## Notes and Known Issues
 Since the officially recommended way to write callback function of server is using "Server_Type::Request  &req" instead of pointer, so cpplint would show issue of using pointer.

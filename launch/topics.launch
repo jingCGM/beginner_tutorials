@@ -1,0 +1,12 @@
+<launch>
+  <arg name="rate" />
+
+  <env name="ROSCONSOLE_CONFIG_FILE" 
+       value="$(find beginner_tutorials)/config/rosconsole.config"/>
+
+  <group ns="topics">
+    <node pkg="beginner_tutorials" name="publisher" type="talker" output = "screen" launch-prefix="xterm -e" args="$(arg rate)"/>
+    <node pkg="beginner_tutorials" name="subscriber" type="listener" args="$(arg rate)" output = "screen" launch-prefix="xterm -e"/>
+  </group>
+
+</launch>

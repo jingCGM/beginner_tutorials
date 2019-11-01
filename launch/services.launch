@@ -1,0 +1,13 @@
+<launch>
+  <arg name="value1" default="10" />
+  <arg name="value2" default="11" />
+
+  <env name="ROSCONSOLE_CONFIG_FILE" 
+       value="$(find beginner_tutorials)/config/rosconsole.config"/>
+
+  <group ns="services">
+    <node pkg="beginner_tutorials" name="server" type="add_two_ints_server" output = "screen" launch-prefix="xterm -e"/>
+    <node pkg="beginner_tutorials" name="client" type="add_two_ints_client" args="$(arg value1) $(arg value2)" output = "screen" launch-prefix="xterm -e"/>
+  </group>
+
+</launch>

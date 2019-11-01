@@ -18,7 +18,7 @@
 int main(int argc, char **argv) {
   ros::init(argc, argv, "add_two_ints_client");
   if (argc != 3) {
-    ROS_INFO("usage: add_two_ints_client X Y");
+    ROS_INFO_STREAM("usage: add_two_ints_client X Y");
     return 1;
   }
 
@@ -29,9 +29,9 @@ int main(int argc, char **argv) {
   srv.request.a = atoll(argv[1]);
   srv.request.b = atoll(argv[2]);
   if (client.call(srv)) {
-    ROS_INFO("Sum: %ld", (int64_t)srv.response.sum);
+    ROS_INFO_STREAM("Sum: "<<(int64_t)srv.response.sum);
   } else {
-    ROS_ERROR("Failed to call service add_two_ints");
+    ROS_ERROR_STREAM("Failed to call service add_two_ints");
     return 1;
   }
 

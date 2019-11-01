@@ -16,8 +16,15 @@
 bool add(beginner_tutorials::AddTwoInts::Request  &req,
          beginner_tutorials::AddTwoInts::Response &res) {
   res.sum = req.a + req.b;
-  ROS_INFO("request: x=%ld, y=%ld", (int64_t)req.a, (int64_t)req.b);
-  ROS_INFO("sending back response: [%ld]", (int64_t)res.sum);
+  ROS_INFO_STREAM("request: x="<<(int64_t)req.a<<", y="<<(int64_t)req.b);
+  ROS_INFO_STREAM("sending back response: "<<(int64_t)res.sum);
+
+  ROS_DEBUG_STREAM("testing debug logging");
+  ROS_INFO_STREAM("testing info logging");
+  ROS_WARN_STREAM("testing warning logging");
+  ROS_ERROR_STREAM("testing error logging");
+  ROS_FATAL_STREAM("testing fatal logging");
+  
   return true;
 }
 
@@ -32,7 +39,7 @@ int main(int argc, char **argv) {
   ros::NodeHandle n;
 
   ros::ServiceServer service = n.advertiseService("add_two_ints", add);
-  ROS_INFO("Ready to add two ints.");
+  ROS_INFO_STREAM("Ready to add two ints.");
   ros::spin();
 
   return 0;
