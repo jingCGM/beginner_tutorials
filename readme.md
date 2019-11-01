@@ -31,6 +31,7 @@ If there exist beginner_tutorials project
 ```
 roscd beginner_tutorials
 git pull
+git checkout Week10_HW
 cd ../../
 catkin_make
 ```
