@@ -28,10 +28,10 @@ int main(int argc, char **argv) {
   ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
 
   int looprate = atoi(argv[1]);
-  if (looprate<1) looprate = 1;
-  else if(looprate>20) looprate = 20;
+  if (looprate < 1) looprate = 1;
+  else if (looprate > 20) looprate = 20;
 
-  ROS_DEBUG_STREAM("rate: "<<looprate);
+  ROS_DEBUG_STREAM("rate: " << looprate);
   ros::Rate loop_rate(looprate);
 
   int count = 0;

@@ -16,15 +16,15 @@
 bool add(beginner_tutorials::AddTwoInts::Request  &req,
          beginner_tutorials::AddTwoInts::Response &res) {
   res.sum = req.a + req.b;
-  ROS_INFO_STREAM("request: x="<<(int64_t)req.a<<", y="<<(int64_t)req.b);
-  ROS_INFO_STREAM("sending back response: "<<(int64_t)res.sum);
+  ROS_INFO_STREAM("request: x=" << (int64_t)req.a << ", y=" << (int64_t)req.b);
+  ROS_INFO_STREAM("sending back response: " << (int64_t)res.sum);
 
   ROS_DEBUG_STREAM("testing debug logging");
   ROS_INFO_STREAM("testing info logging");
   ROS_WARN_STREAM("testing warning logging");
   ROS_ERROR_STREAM("testing error logging");
   ROS_FATAL_STREAM("testing fatal logging");
-  
+
   return true;
 }
 
