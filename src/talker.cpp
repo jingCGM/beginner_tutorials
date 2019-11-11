@@ -6,8 +6,9 @@
  */
 #include <cstdlib>
 #include <sstream>
-#include "ros/ros.h"
-#include "std_msgs/String.h"
+#include <ros/ros.h>
+#include <std_msgs/String.h>
+#include <tf/transform_broadcaster.h>
 
 /**
  * @brief main function of subscriber, which publish "chatter" topic
@@ -23,6 +24,14 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  tf::TransformBroadcaster broadcaster;
+  tf::Transform transform;
+  transform.setOrigin(tf::Vector3(1,0,0));
+  tf::Quaternion quaternionValue;
+  quaternionValue.setRPY(0, 0, 1.57);
+  transform.setRotation(quaternionValue);
+
+
   ros::NodeHandle n;
 
   ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
@@ -34,22 +43,21 @@ int main(int argc, char **argv) {
   ROS_DEBUG_STREAM("rate: " << looprate);
   ros::Rate loop_rate(looprate);
 
-  int count = 0;
+  
+
   while (ros::ok()) {
     std_msgs::String msg;
-
     std::stringstream ss;
-    ss << "It's a customized message: " << count;
+    ss << "It's a customized message";
     msg.data = ss.str();
 
-    ROS_INFO("%s", msg.data.c_str());
+    broadcaster.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "world", "talk"));
 
     chatter_pub.publish(msg);
 
     ros::spinOnce();
 
     loop_rate.sleep();
-    ++count;
   }
 
   return 0;

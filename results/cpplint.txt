@@ -1,8 +1,0 @@
-cpplint *.cpp
-Done processing add_two_ints_client.cpp
-add_two_ints_server.cpp:16:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::AddTwoInts::Request  &req  [runtime/references] [2]
-add_two_ints_server.cpp:17:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::AddTwoInts::Response &res  [runtime/references] [2]
-Done processing add_two_ints_server.cpp
-Done processing listener.cpp
-Done processing talker.cpp
-Total errors found: 2
