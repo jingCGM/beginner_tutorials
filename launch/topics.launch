@@ -1,12 +1,14 @@
 <launch>
   <arg name="rate" default="10" />
+  <arg name="record" default="true" />
 
-  <env name="ROSCONSOLE_CONFIG_FILE" 
-       value="$(find beginner_tutorials)/config/rosconsole.config"/>
+  <env name="ROSCONSOLE_CONFIG_FILE" value="$(find beginner_tutorials)/config/rosconsole.config"/>
+  
+  <node pkg="beginner_tutorials" name="publisher" type="talker" output = "screen" launch-prefix="xterm -e" args="$(arg rate)"/>
 
-  <group ns="topics">
-    <node pkg="beginner_tutorials" name="publisher" type="talker" output = "screen" launch-prefix="xterm -e" args="$(arg rate)"/>
-    <node pkg="beginner_tutorials" name="subscriber" type="listener" args="$(arg rate)" output = "screen" launch-prefix="xterm -e"/>
-  </group>
+  <node pkg="beginner_tutorials" name="subscriber" type="listener" args="$(arg rate)" output = "screen" launch-prefix="xterm -e"/>
+
+  <node pkg="rosbag" name="record" type="record" args="--all -O $(find beginner_tutorials)/results/output.bag" if="$(arg record)" />
+  
 
 </launch>
