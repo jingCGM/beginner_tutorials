@@ -88,6 +88,7 @@ in new terminal: there will be two frames, one is world and one is talk, talk fr
 View relation between talker and world:
 ```
 	rosrun tf tf_echo /world /talk
+	rosrun rqt_tf_tree rqt_tf_tree
 ```
 
 to view the frames: there will be frames.pdf which shows all information of frames
@@ -98,7 +99,7 @@ to view the frames: there will be frames.pdf which shows all information of fram
 ## Run rostest:
 rostest in this project tests transformation of frames between talk and world frame. The test file also test if talker file publish correct message.
 
-build the test, in catkin work space:
+build the test, assume already run catkin_make, in catkin work space:
 ```
 	catkin_make run_tests
 ```
