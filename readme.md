@@ -52,12 +52,14 @@ Run server and client: open terminal: Where user can change values of value1 and
 
 
 ## Run recorder:
-recorder will record rosbag in 15 seconds and save it in results folder. record argument can control if save ros bag, and its default value is false. default publishing rate is 10hz. 
+recorder will record rosbag in 15 seconds and save it in results folder. record argument can control if save ros bag, and its default value is false. default publishing rate is 10hz. If you want to run launch file without recording, please refer to section "Run launch files"
 ```
 	roslaunch beginner_tutorials topics.launch record:=true
 ```
 
-After record finished terminal will show: "[record-4] process has finished cleanly". Then stop the current terminal using Ctrl+c then do following commands:
+After record finished terminal will show: "[record-4] process has finished cleanly". Then stop the current terminal using Ctrl+c.
+
+To test the bag file do following commands:
 ```
 	roscore
 ```
@@ -96,9 +98,9 @@ to view the frames: there will be frames.pdf which shows all information of fram
 ## Run rostest:
 rostest in this project tests transformation of frames between talk and world frame. The test file also test if talker file publish correct message.
 
-build the test:
+build the test, in catkin work space:
 ```
-	roscd beginner_tutorials && catkin_make run_tests
+	catkin_make run_tests
 ```
 
 run test launch file:

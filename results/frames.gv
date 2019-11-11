@@ -1,7 +1,7 @@
 digraph G {
-"world" -> "talk"[label="Broadcaster: /topics/publisher\nAverage rate: 10.208 Hz\nMost recent transform: 1573448455.489 ( 0.092 sec old)\nBuffer length: 4.800 sec\n"];
+"world" -> "talk"[label="Broadcaster: /publisher\nAverage rate: 10.208 Hz\nMost recent transform: 1573498977.002 ( 0.065 sec old)\nBuffer length: 4.800 sec\n"];
 edge [style=invis];
  subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
-"Recorded at time: 1573448455.581"[ shape=plaintext ] ;
+"Recorded at time: 1573498977.067"[ shape=plaintext ] ;
  }->"world";
 }
