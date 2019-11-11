@@ -34,7 +34,7 @@ TEST(testTF, should_pass) {
       }
     }
     catch (tf::TransformException ex) {
-      ROS_INFO("%s", ex.what());
+      ROS_INFO_STREAM(ex.what());
     }
   }
 
