@@ -19,10 +19,6 @@
 int main(int argc, char **argv) {
   ros::init(argc, argv, "talker");
 
-  if (argc != 2) {
-    ROS_FATAL_STREAM("please set loop rate");
-    return 1;
-  }
 
   tf::TransformBroadcaster broadcaster;
   tf::Transform transform;
@@ -36,7 +32,14 @@ int main(int argc, char **argv) {
 
   ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
 
-  int looprate = atoi(argv[1]);
+  int looprate = 0;
+  
+  if (argc != 2) {
+    ROS_WARN_STREAM("default loop rate is 10");
+    looprate = 10;
+  }
+  else looprate = atoi(argv[1]);
+
   if (looprate < 1) looprate = 1;
   else if (looprate > 20) looprate = 20;
 
