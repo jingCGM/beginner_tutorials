@@ -1,6 +1,6 @@
 <launch>
   <arg name="rate" default="10" />
-  <arg name="record" default="true" />
+  <arg name="record" default="false" />
 
   <env name="ROSCONSOLE_CONFIG_FILE" value="$(find beginner_tutorials)/config/rosconsole.config"/>
   

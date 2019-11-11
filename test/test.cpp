@@ -7,9 +7,7 @@
 #include <gtest/gtest.h>
 #include <tf/transform_listener.h>
 #include <std_msgs/String.h>
-
-// global variable which is used to store subscribed value 
-static std::string message;
+#include <boost/bind.hpp>
 
 
 /**
@@ -28,41 +26,64 @@ TEST(testTF, should_pass) {
   quaternionValue.setRPY(0, 0, 1.57);
 
   while (!test) {
-    try{
+    try {
       listener.lookupTransform("/world", "/talk", ros::Time(0), transform);
-      if ( transform.getOrigin() == tf::Vector3(1,0,0) && transform.getRotation() == quaternionValue) {
-	  	test = true;
-	  }
+      if (transform.getOrigin() == tf::Vector3(1, 0, 0) &&
+        transform.getRotation() == quaternionValue) {
+        test = true;
+      }
     }
-    catch (tf::TransformException ex){
-      ROS_INFO("%s",ex.what());
+    catch (tf::TransformException ex) {
+      ROS_INFO("%s", ex.what());
     }
   }
 
   EXPECT_EQ(groundtruth, test);
 }
 
+/** @brief class can define subscriber and save subscribed data */
+class testPublisher {
+ public:
+  /** @brief received message. */
+  std::string message;
 
-/**
- * @brief call back function check message when received it
- * @param message of chatter
- */
-void chatterCallback(const std_msgs::String::ConstPtr& msg) {
-  message = msg->data;
+  /** @brief ros node handle. */
+  ros::NodeHandle n;
+
+  /** @brief subscriber of chatter topic. */
+  ros::Subscriber sub;
+
+  /**
+   * @brief define subscriber
+   */
+  void defineSubscriber();
+
+  /**
+   * @brief call back function print message when received it
+   * @param message of chatter
+   */
+  void chatterCallback(const std_msgs::String::ConstPtr& msg);
+};
+
+void testPublisher::defineSubscriber() {
+  testPublisher::sub = n.subscribe<std_msgs::String>("chatter", 10,
+    &testPublisher::chatterCallback, this);
 }
 
+void testPublisher::chatterCallback(const std_msgs::String::ConstPtr& msg) {
+  testPublisher::message = msg->data;
+}
 
 /**
  * @brief Checks if publish message is right
  */
 TEST(testPublish, should_pass) {
-  ros::NodeHandle nh1;
-  
-  ros::Subscriber sub = nh1.subscribe("chatter", 1000, chatterCallback);
+  testPublisher testing;
+  testing.defineSubscriber();
 
   std::string groundtruth = "It's a customized message";
 
-  while (message == "")  ros::spinOnce();
+  while (testing.message == "")  ros::spinOnce();
 
-  EXPECT_EQ(groundtruth, message);
+  EXPECT_EQ(groundtruth, testing.message);
 }

@@ -52,7 +52,7 @@ Run server and client: open terminal: Where user can change values of value1 and
 
 
 ## Run recorder:
-recorder will record rosbag in 15 seconds and save it in results folder. record argument can control if save ros bag, and its default value is true. default publishing rate is 10hz. 
+recorder will record rosbag in 15 seconds and save it in results folder. record argument can control if save ros bag, and its default value is false. default publishing rate is 10hz. 
 ```
 	roslaunch beginner_tutorials topics.launch record:=true
 ```
