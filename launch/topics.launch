@@ -8,7 +8,7 @@
 
   <node pkg="beginner_tutorials" name="subscriber" type="listener" args="$(arg rate)" output = "screen" launch-prefix="xterm -e"/>
 
-  <node pkg="rosbag" name="record" type="record" args="--all -O $(find beginner_tutorials)/results/output.bag" if="$(arg record)" />
+  <node pkg="rosbag" name="record" type="record" args="--all --duration=15 -O $(find beginner_tutorials)/results/output.bag" if="$(arg record)" />
   
 
 </launch>
